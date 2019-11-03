@@ -45,7 +45,7 @@ func NewReader(path string, idx string, handler func([]byte)) *Reader {
 	return r
 }
 
-func (r *Reader) Reader() {
+func (r *Reader) Close() {
 	r.cancel()
 	<-r.finished
 }
@@ -54,7 +54,7 @@ func (r *Reader) reader(ctx context.Context) {
 
 	for {
 
-		filename := fmt.Sprintf("%s/%06d.tmp", r.path, r.cnt.Get())
+		filename := fmt.Sprintf("%s/%06d", r.path, r.cnt.Get())
 
 		if _, err := os.Stat(filename); os.IsNotExist(err) {
 			log.Info("wait file " + filename)
