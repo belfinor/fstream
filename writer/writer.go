@@ -1,8 +1,8 @@
 package writer
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
-// @version 1.000
-// @date    2019-11-02
+// @version 1.001
+// @date    2019-11-03
 
 import (
 	"context"
@@ -57,12 +57,12 @@ func (w *Writer) Close() {
 
 func (w *Writer) openLog() {
 
-	file_name := fmt.Sprintf("%s/%d.tmp", w.Path, w.Cnt.Get())
+	file_name := fmt.Sprintf("%s/%06d.tmp", w.Path, w.Cnt.Get())
 	var err error
 
 	if w.File != nil {
 		w.File.Close()
-		last_name := fmt.Sprintf("%s/%d", w.Path, (w.Cnt.Get()+FileNumberMod-1)%FileNumberMod)
+		last_name := fmt.Sprintf("%s/%06d", w.Path, (w.Cnt.Get()+FileNumberMod-1)%FileNumberMod)
 		os.Rename(last_name+".tmp", last_name)
 	}
 
@@ -80,7 +80,7 @@ func (w *Writer) rotate() {
 
 	w.openLog()
 
-	remove_name := fmt.Sprintf("%s/%d", w.Path, (w.Cnt.Get()+FileNumberMod-SaveFiles)%FileNumberMod)
+	remove_name := fmt.Sprintf("%s/%06d", w.Path, (w.Cnt.Get()+FileNumberMod-SaveFiles)%FileNumberMod)
 	os.Remove(remove_name)
 }
 
@@ -129,7 +129,7 @@ func (w *Writer) writer(ctx context.Context) {
 
 			if w.File != nil {
 				w.File.Close()
-				last_name := fmt.Sprintf("%s/%d", w.Path, w.Cnt.Get())
+				last_name := fmt.Sprintf("%s/%06d", w.Path, w.Cnt.Get())
 				os.Rename(last_name+".tmp", last_name)
 			}
 
