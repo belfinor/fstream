@@ -1,4 +1,4 @@
-package writer
+package fstream
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
 // @version 1.001
@@ -16,13 +16,6 @@ import (
 	"github.com/belfinor/pack"
 )
 
-const (
-	MessageLimit  int   = 2048
-	FileNumberMod int64 = 1000000
-	SaveFiles     int64 = 10000
-	SavePeriod    int64 = 60
-)
-
 type Writer struct {
 	Input    chan []byte
 	File     *os.File
@@ -32,7 +25,7 @@ type Writer struct {
 	finished chan bool
 }
 
-func Open(path string, idx string) *Writer {
+func NewWriter(path string, idx string) *Writer {
 
 	w := &Writer{
 		Input:    make(chan []byte, MessageLimit),
