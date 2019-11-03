@@ -128,7 +128,7 @@ func (w *Writer) writer(ctx context.Context) {
 
 			w.Cnt.Inc()
 
-			w.finished <- true
+			close(w.finished)
 
 			return
 
