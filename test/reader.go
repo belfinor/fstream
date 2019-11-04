@@ -9,7 +9,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/belfinor/fstream"
 )
@@ -21,7 +20,7 @@ func main() {
 	w := fstream.NewReader(".data", ".data/reader.idx", func(data []byte) { fmt.Println(string(data)) })
 	defer w.Close()
 
-	for {
-		<-time.After(time.Second)
-	}
+	wait := make(chan int)
+
+	<-wait
 }
