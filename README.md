@@ -78,8 +78,8 @@ func main() {
 	w := fstream.NewReader(".data", ".data/reader.idx", handler)
 	defer w.Close()
 
-	for {
-		<-time.After(time.Second)
-	}
+  wait := make(chan int)
+
+	<-wait
 }
 ```
