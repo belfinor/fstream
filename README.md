@@ -17,7 +17,13 @@ Writer saves the last 10000 files and and deletes older.
 
 fstream is useful when there is a large flow of events and there is no way to process them on the fly or use solutions such as RabbitMQ. It's effective for statistics aggregation and subsequent processing.
 
-## Writer example
+# Install
+
+```
+go get "github.com/belfinor/fstream"
+```
+
+# Writer example
 
 ```go
 package main
@@ -58,7 +64,7 @@ func main() {
 }
 ```
 
-## Reader example
+# Reader example
 
 ```go
 package main
