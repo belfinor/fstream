@@ -18,38 +18,38 @@ fstream is useful when there is a large flow of events and there is no way to pr
 package main
 
 import (
-	"bufio"
-	"os"
-	"strings"
+  "bufio"
+  "os"
+  "strings"
 
-	"github.com/belfinor/fstream"
+  "github.com/belfinor/fstream"
 )
 
 func main() {
 
-	os.Mkdir(".data", 0777)
+  os.Mkdir(".data", 0777)
 
-	w := fstream.NewWriter(".data", ".data/writer.idx")
-	defer w.Close()
+  w := fstream.NewWriter(".data", ".data/writer.idx")
+  defer w.Close()
 
-	br := bufio.NewReader(os.Stdin)
+  br := bufio.NewReader(os.Stdin)
 
-	for {
+  for {
 
-		str, err := br.ReadString('\n')
-		if err != nil && str == "" {
-			break
-		}
+    str, err := br.ReadString('\n')
+    if err != nil && str == "" {
+      break
+    }
 
-		str = strings.TrimSpace(str)
+    str = strings.TrimSpace(str)
 
-		if str == "" {
-			continue
-		}
+    if str == "" {
+      continue
+    }
 
-		w.Write([]byte(str))
+    w.Write([]byte(str))
 
-	}
+  }
 }
 ```
 
