@@ -59,11 +59,11 @@ func main() {
 package main
 
 import (
-	"fmt"
-	"os"
-	"time"
+  "fmt"
+  "os"
+  "time"
 
-	"github.com/belfinor/fstream"
+  "github.com/belfinor/fstream"
 )
 
 func handler(data []byte) {
@@ -73,10 +73,10 @@ func handler(data []byte) {
 
 func main() {
 
-	os.Mkdir(".data", 0777)
+  os.Mkdir(".data", 0777)
 
-	w := fstream.NewReader(".data", ".data/reader.idx", handler)
-	defer w.Close()
+  w := fstream.NewReader(".data", ".data/reader.idx", handler)
+  defer w.Close()
 
   wait := make(chan int)
 
