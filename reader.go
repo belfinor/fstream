@@ -1,8 +1,8 @@
 package fstream
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
-// @version 1.001
-// @date    2019-11-03
+// @version 1.002
+// @date    2019-11-04
 
 import (
 	"bufio"
@@ -110,7 +110,7 @@ func (r *Reader) onFile(filename string) {
 
 func (r *Reader) onData(data []byte) {
 	r.data = bytes.Join([][]byte{r.data, data}, []byte{})
-	size := int16(0)
+	size := uint16(0)
 
 	list := r.data
 

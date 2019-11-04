@@ -1,13 +1,14 @@
 package fstream
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
-// @version 1.001
-// @date    2019-11-03
+// @version 1.002
+// @date    2019-11-04
 
 import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"os"
 	"time"
 
@@ -83,6 +84,10 @@ func (w *Writer) Write(data []byte) (int, error) {
 
 	if size == 0 {
 		return 0, errors.New("no input data")
+	}
+
+	if size > math.MaxUint16 {
+		return 0, errors.New("message too long")
 	}
 
 	block := make([]byte, size)
