@@ -11,7 +11,7 @@ File format:
 Message size is stored in uint16 value.
 
 All files are saved in the selected directory and have names similar to the following 000000, 000001, 000002, ...
-The name 000000 follows 999999. The current file name is stored in idx file.
+The name 000000 follows name 999999. The current file name is stored in idx file.
 
 Writer saves the last 10000 files and and deletes older.
 
