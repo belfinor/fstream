@@ -80,6 +80,6 @@ func main() {
 
   wait := make(chan int)
 
-	<-wait
+  <-wait
 }
 ```
