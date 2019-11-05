@@ -17,8 +17,17 @@ func main() {
 
 	os.Mkdir(".data", 0777)
 
-	w := fstream.NewReader(".data", ".data/reader.idx", func(data []byte) { fmt.Println(string(data)) })
-	defer w.Close()
+	r := fstream.NewReader(".data", ".data/reader.idx", func(data []byte) { fmt.Println(string(data)) })
+
+	r.BeforeReadFile = func(filename string) {
+		fmt.Printf("process file %s\n", filename)
+	}
+
+	r.AfterReadFile = func(filename string) {
+		fmt.Printf("finish file %s\n", filename)
+	}
+
+	defer r.Close()
 
 	wait := make(chan int)
 

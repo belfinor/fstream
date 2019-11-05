@@ -1,8 +1,8 @@
 package fstream
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
-// @version 1.002
-// @date    2019-11-04
+// @version 1.003
+// @date    2019-11-05
 
 import (
 	"bufio"
@@ -18,22 +18,26 @@ import (
 )
 
 type Reader struct {
-	path     string
-	handler  func([]byte)
-	cnt      *fcounter.Counter
-	data     []byte
-	cancel   context.CancelFunc
-	finished chan bool
+	path           string
+	handler        func([]byte)
+	cnt            *fcounter.Counter
+	data           []byte
+	cancel         context.CancelFunc
+	finished       chan bool
+	BeforeReadFile func(string)
+	AfterReadFile  func(string)
 }
 
 func NewReader(path string, idx string, handler func([]byte)) *Reader {
 
 	r := &Reader{
-		path:     path,
-		cnt:      fcounter.New(idx, FileNumberMod),
-		handler:  handler,
-		data:     []byte{},
-		finished: make(chan bool),
+		path:           path,
+		cnt:            fcounter.New(idx, FileNumberMod),
+		handler:        handler,
+		data:           []byte{},
+		finished:       make(chan bool),
+		BeforeReadFile: func(filename string) {},
+		AfterReadFile:  func(filename string) {},
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -84,6 +88,16 @@ func (r *Reader) reader(ctx context.Context) {
 }
 
 func (r *Reader) ReadFile(filename string) {
+
+	if r.BeforeReadFile != nil {
+		r.BeforeReadFile(filename)
+	}
+
+	defer func() {
+		if r.AfterReadFile != nil {
+			r.AfterReadFile(filename)
+		}
+	}()
 
 	log.Info("process file " + filename)
 

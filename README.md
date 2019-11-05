@@ -94,3 +94,25 @@ func main() {
   <-wait
 }
 ```
+
+# Reader hooks
+
+## AfterReadFile
+
+Called after Reader has read the next binary file. Example:
+
+```go
+r.AfterReadFile = func(filename string) {
+  fmt.Printf("%s processed", filename)
+}
+```
+
+## BeforeReadFile
+
+Сalled before Reader starts processing the next binary file. Example:
+
+```go
+r.BeforeReadFile = func(filename string) {
+  fmt.Printf("process %s", filename)
+}
+```
