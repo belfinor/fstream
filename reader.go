@@ -1,7 +1,7 @@
 package fstream
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
-// @version 1.004
+// @version 1.005
 // @date    2019-11-05
 
 import (
@@ -83,14 +83,14 @@ func (r *Reader) reader(ctx context.Context) {
 			continue
 		}
 
-		r.ReadFile(filename)
+		r.readFile(filename)
 
 		r.cnt.Inc()
 	}
 
 }
 
-func (r *Reader) ReadFile(filename string) {
+func (r *Reader) readFile(filename string) {
 
 	if r.BeforeReadFile != nil {
 		r.BeforeReadFile(filename)
@@ -160,4 +160,15 @@ func (r *Reader) onData(cnt *int, data []byte) {
 	} else {
 		r.data = []byte{}
 	}
+}
+
+func ReadFile(filename string, fn func(data []byte)) {
+	rd := &Reader{
+		handler:        fn,
+		data:           []byte{},
+		BeforeReadFile: func(filename string) {},
+		AfterReadFile:  func(filename string) {},
+	}
+
+	rd.readFile(filename)
 }
