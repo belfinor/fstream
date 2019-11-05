@@ -1,7 +1,7 @@
 package fstream
 
 // @author  Mikhail Kirillov <mikkirillov@yandex.ru>
-// @version 1.003
+// @version 1.004
 // @date    2019-11-05
 
 import (
@@ -56,6 +56,8 @@ func (r *Reader) Close() {
 }
 
 func (r *Reader) reader(ctx context.Context) {
+
+	<-time.After(time.Second * 2)
 
 	for {
 
