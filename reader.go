@@ -14,6 +14,7 @@ import (
 
 	"github.com/belfinor/fcounter"
 	"github.com/belfinor/log"
+	"github.com/belfinor/ltime/timer"
 	"github.com/belfinor/pack"
 )
 
@@ -99,6 +100,9 @@ func (r *Reader) ReadFile(filename string) {
 		}
 	}()
 
+	tm := timer.New()
+	cnt := 0
+
 	log.Info("process file " + filename)
 
 	f, err := os.Open(filename)
@@ -118,11 +122,13 @@ func (r *Reader) ReadFile(filename string) {
 			break
 		}
 
-		r.onData(buffer[:n])
+		r.onData(&cnt, buffer[:n])
 	}
+
+	log.Info(fmt.Sprintf("%s processed events=%d time=%.3f", filename, cnt, tm.DeltaFloat()))
 }
 
-func (r *Reader) onData(data []byte) {
+func (r *Reader) onData(cnt *int, data []byte) {
 	r.data = bytes.Join([][]byte{r.data, data}, []byte{})
 	size := uint16(0)
 
@@ -134,11 +140,14 @@ func (r *Reader) onData(data []byte) {
 		}
 		size = size + 2
 		if len(list) > int(size) {
+
 			r.handler(list[2:size])
 			list = list[size:]
+			*cnt++
 		} else if len(list) == int(size) {
 			r.handler(list[2:])
 			list = []byte{}
+			*cnt++
 		} else {
 			break
 		}
