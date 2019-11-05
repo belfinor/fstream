@@ -92,6 +92,11 @@ func (r *Reader) reader(ctx context.Context) {
 
 func (r *Reader) readFile(filename string) {
 
+	tm := timer.New()
+	cnt := 0
+
+	log.Info("process file " + filename)
+
 	if r.BeforeReadFile != nil {
 		r.BeforeReadFile(filename)
 	}
@@ -100,12 +105,8 @@ func (r *Reader) readFile(filename string) {
 		if r.AfterReadFile != nil {
 			r.AfterReadFile(filename)
 		}
+		log.Info(fmt.Sprintf("%s processed events=%d time=%.3f", filename, cnt, tm.DeltaFloat()))
 	}()
-
-	tm := timer.New()
-	cnt := 0
-
-	log.Info("process file " + filename)
 
 	f, err := os.Open(filename)
 	if err != nil {
@@ -126,8 +127,6 @@ func (r *Reader) readFile(filename string) {
 
 		r.onData(&cnt, buffer[:n])
 	}
-
-	log.Info(fmt.Sprintf("%s processed events=%d time=%.3f", filename, cnt, tm.DeltaFloat()))
 }
 
 func (r *Reader) onData(cnt *int, data []byte) {
