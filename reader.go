@@ -76,14 +76,14 @@ func (r *Reader) reader(ctx context.Context) {
 			continue
 		}
 
-		r.onFile(filename)
+		r.ReadFile(filename)
 
 		r.cnt.Inc()
 	}
 
 }
 
-func (r *Reader) onFile(filename string) {
+func (r *Reader) ReadFile(filename string) {
 
 	log.Info("process file " + filename)
 
