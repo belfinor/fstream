@@ -1,9 +1,13 @@
 github.com/belfinor/chash v1.0.0/go.mod h1:Q0Hg0TpTNB5LLKnvKp7sP82T4HZCxm1pgCQ0+vDN5UY=
 github.com/belfinor/fcounter v1.0.0 h1:XzGIC0piq0BaF4vWqGqsWLMOWXvuRMpZUIQvXkw7NZ0=
 github.com/belfinor/fcounter v1.0.0/go.mod h1:WXemR8lT05Hc41a/rURV68JMYSz3UftBXUKv6CDA5pc=
+github.com/belfinor/kvstring v1.0.0 h1:M0b5IVTSm3+cKZuU6ySUW+hR+nAEizS0uGFUewmSK5o=
+github.com/belfinor/kvstring v1.0.0/go.mod h1:O+5roAfl1rmj8KkYu0yWlzcKL+M91Ahersh1pnIEKKw=
 github.com/belfinor/lcache v1.0.2/go.mod h1:So3sXqx0J5LxpMFfSQqPVKGOn6zRuN6otOKDHQroDIA=
 github.com/belfinor/log v1.0.0 h1:qnMY6RKSHQ2a3NNSSACNiPy+psPT6yl8BN/iPFVo1NE=
 github.com/belfinor/log v1.0.0/go.mod h1:ESWHrrqJ8wYOAdfTsdM9RKul81mmu9pYVMQBU24EZuo=
+github.com/belfinor/log v1.0.2 h1:oxiPQT1fLFPwo1GIU6p7yecsi6DKDXqC0EwAA/38A5Q=
+github.com/belfinor/log v1.0.2/go.mod h1:TL35gADGULknL+Igij7qjxP0kiaLHdKPGQf01QNGWPQ=
 github.com/belfinor/ltime v1.0.0/go.mod h1:iDBKtP06KmqyM/SO6IqNSGJuy4/9FJWlombEjfK0QoA=
 github.com/belfinor/ltime v1.0.1 h1:0Sm1aP8KKAKXoiOix8XHq4G7SFDKnX8v16vCftGoC9o=
 github.com/belfinor/ltime v1.0.1/go.mod h1:Uqj6GAPh31KY+3vZ1VbiwN0PcHdKsgZdR5I0+po+D6g=
